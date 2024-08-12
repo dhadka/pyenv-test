@@ -20,14 +20,14 @@ jobs:
           curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
           echo "PYENV_ROOT=$HOME/.pyenv" >> $GITHUB_ENV
           echo "$HOME/.pyenv/bin" >> $GITHUB_PATH
-          eval "$(pyenv init -)"
 
       - name: Install Python
         run: |
           TMPDIR=$(pwd)/tmp/ pyenv install -s ${PYVER}
           pyenv local ${PYVER}
+          eval "$(pyenv init -)"
 
       - name: Test Install
-        run:
+        run: |
           python -V
           which python
