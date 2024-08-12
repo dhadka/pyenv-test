@@ -18,19 +18,15 @@ jobs:
         run: |
           echo "PYVER=2.7" >> $GITHUB_ENV
 
-      - name: Install Pyenv (Linux)
-        if: ${{ runner.os == 'Linux' }}
+      - name: Install Pyenv
         run: |
-          curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+          if which brew; then
+            brew install pyenv
+          else
+            curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+          fi
+          
           echo "PYENV_ROOT=$HOME/.pyenv" >> $GITHUB_ENV
-          echo "$HOME/.pyenv/bin" >> $GITHUB_PATH
-          echo "$HOME/.pyenv/shims" >> $GITHUB_PATH
-
-      - name: Install Pyenv (Mac)
-        if: ${{ runner.os == 'macOS' }}
-        run: |
-          brew install pyenv
-          pyenv shims
           echo "$HOME/.pyenv/bin" >> $GITHUB_PATH
           echo "$HOME/.pyenv/shims" >> $GITHUB_PATH
         
