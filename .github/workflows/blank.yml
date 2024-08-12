@@ -30,6 +30,9 @@ jobs:
         if: ${{ runner.os == 'macOS' }}
         run: |
           brew install pyenv
+          pyenv shims
+          echo "$HOME/.pyenv/bin" >> $GITHUB_PATH
+          echo "$HOME/.pyenv/shims" >> $GITHUB_PATH
         
       - name: Install Python
         run: |
